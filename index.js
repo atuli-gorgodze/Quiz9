@@ -5,21 +5,27 @@ const itemList = document.getElementById('item-list');
 function addItem() {
     const itemText = itemInput.value.trim();
     if (itemText === '') {
-      alert('Please enter a task!');
-      return;
+        alert('Please enter a task!');
+        return;
     }
+
+    const taskItem = document.createElement('li');
+    taskItem.className = 'task-item';
+
+    const taskTextSpan = document.createElement('span');
+    taskTextSpan.textContent = itemText;
+    taskItem.appendChild(taskTextSpan);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete-Item';
+    deleteBtn.addEventListener('click', () => {
+        itemList.removeChild(taskItem);  
+        
+    });
+    taskItem.appendChild(deleteBtn);
+
+    itemList.appendChild(taskItem);
+    itemInput.value = '';
 }
 
- const shoppingItem = document.createElement('li')
- shoppingItem.className = 'shopItem';
-
- const itemTextSpan = document.createElement('span');
-  itemTextSpan.textContent = itemList;
-  shoppingItem.appendChild(itemTextSpan);
-
-  const deleteBtn = document.createElement('button');
-  deleteBtn.textContent = 'Delete';
-  deleteBtn.addEventListener('click', () => {
-    itemList.removeChild(shopItem);
-  });
-  shoppingItem.appendChild(deleteBtn);
+addItemBtn.addEventListener('click', addItem);
